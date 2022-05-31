@@ -18,7 +18,7 @@ SECTIONS
         _la_data = _etext;
     }> FLASH
 
-    // Esta secao deve incluir a secao .data de todos arquivos objeto de entrada
+    /* Esta secao deve incluir a secao .data de todos arquivos objeto de entrada */
     .data :
     {
         _sdata = .;
@@ -27,7 +27,7 @@ SECTIONS
         _edata = .;
     }> SRAM AT> FLASH
 
-    // Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada
+    /* Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada */
     .bss :
     {
         . = ALIGN(4);

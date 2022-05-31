@@ -42,7 +42,7 @@
 #define GPIO_BSRR13_SET 	(0) //Liga
 #define GPIO_BSRR13_RESET 	(1) //Desliga
 
-static const char fw_version[] = {'V', '1', '.', '0'};
+// static const char fw_version[] = {'V', '1', '.', '0'};
 static uint32_t led_status;
 static int LED_DELAY = 50000;
 
