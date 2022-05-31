@@ -8,22 +8,32 @@ SRAM(rwx): ORIGIN = 0x20000000, LENGTH = 128K
 
 SECTIONS
 {
-.text :
-{
-KEEP(*(.isr_vectors))   // Combinar todas as secoes .isr_vectors de todos arquivos de entrada
-*(.text)                // combinar todas as secoes .text de todos arquivos de entrada
-*(.rodata)              // combinar todas as secoes .rodata de todos arquivos de entrada
-}> FLASH
+    .text :
+    {
+        KEEP(*(.isr_vectors))   // Combinar todas as secoes .isr_vectors de todos arquivos de entrada
+        *(.text)                // combinar todas as secoes .text de todos arquivos de entrada
+        *(.rodata)              // combinar todas as secoes .rodata de todos arquivos de entrada
+        . = ALIGN(4);
+        _etext = .;
+        _la_data = _etext;
+    }> FLASH
 
-// Esta secao deve incluir a secao .data de todos arquivos objeto de entrada
-.data :
-{
-*(.data)
-}> SRAM AT> FLASH
+    // Esta secao deve incluir a secao .data de todos arquivos objeto de entrada
+    .data :
+    {
+        _sdata = .;
+        *(.data)
+        . = ALIGN(4);
+        _edata = .;
+    }> SRAM AT> FLASH
 
-// Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada
-.bss :
-{
-*(.bss)
-}> SRAM
+    // Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada
+    .bss :
+    {
+        . = ALIGN(4);
+        _sbss = .;
+        *(.bss)
+        . = ALIGN(4);
+        _ebss = .;
+    }> SRAM
 }
